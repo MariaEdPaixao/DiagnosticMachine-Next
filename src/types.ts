@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type ConteudoProps = {
     id: number;
     imagem: string;
@@ -19,7 +21,7 @@ export type SobreProps = {
     id: number;
     rm_turma: string;
     nome: string;
-    foto: string;
+    foto: string | StaticImageData;
     github: string;
     linkedin: string;
 }
