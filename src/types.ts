@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image";
 
 export type ConteudoProps = {
     id: number;
-    imagem: string;
+    imagem: string | StaticImageData;
     titulo: string;
     categoria: 'video' | 'jogo' | 'artigo';
     descricao: string;
