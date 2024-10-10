@@ -213,6 +213,7 @@ export const CardStyle = styled.div`
    border-radius: 20px;
    height: 497px;
    width: 313px;
+   align-items: center;
 
    img{
       width: 100%;
@@ -248,7 +249,7 @@ export const CardStyle = styled.div`
 
    .list-posts p {
       margin-top: 20px;
-
+      margin-bottom:  10px;
       font-size: 18px;
    }
 
@@ -260,7 +261,8 @@ export const CardStyle = styled.div`
 
       text-align: center;   
       padding: 10px;
-      margin-top: 15px;
+      
+      margin: auto;
    }
 
    #saiba-mais a {
@@ -269,20 +271,22 @@ export const CardStyle = styled.div`
    }
 
    @media screen and (max-width:930px){
-      height: 510px;
+      height: 523px;
       width: 250px;
       margin-top: 20px;
-
-   }
-
-   @media screen and (max-width:590px){
-      height: 500px;
-      width: 250px;
-
+      
       .list-posts p {
          font-size: 16px;
       }
+      .list-posts h2{
+      font-size: 20px;
    }
+   }
+
+   /* @media screen and (max-width:590px){
+      height: 500px;
+      width: 250px;
+   } */
 `
 export const ContainerCard = styled.div`
    background-color: white;
@@ -290,7 +294,7 @@ export const ContainerCard = styled.div`
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
-   justify-content: flex-start;
+   justify-content: space-evenly;
    align-items: flex-start;
    align-content:space-around;
 `
@@ -554,21 +558,25 @@ export const ImgAjuda = styled.div`
    @media screen and (max-width:821px){
       .dica{
          width: 590px;
+         height: 396px;
       }
    }
    @media screen and (max-width:775px){
       .dica{
          width: 560px;
+         height: 376px;
       }
    }
    @media screen and (max-width:665px){
       .dica{
          width: 450px;
+         height: 302px;
       }
    }
    @media screen and (max-width:545px){
       .dica{
          width: 350px;
+         height: 235px;
       }
    }
 `
@@ -648,6 +656,7 @@ export const CardDevsStyle = styled.div`
       }
       .icons img{
          width: 25px;
+         height: 24px;
       }
       .infos h3{
          font-size: 17px;
@@ -692,7 +701,15 @@ export const CardSobreStyle = styled.div`
       margin-left: 400px;
    }
 
+   @media screen and (max-width: 1125px){
+        #fundo-sobre {
+            max-height: 620px;
+        }
+   }
    @media screen and (max-width:1040px){
+        #fundo-sobre {
+            max-height: 605px;
+        }
       #texto{
          margin-top: 8px;
          font-size: 14px;
@@ -707,11 +724,16 @@ export const CardSobreStyle = styled.div`
    }
 
    @media screen and (max-width:860px){
+        #fundo-sobre {
+            max-height: 540px;
+        }
+
       #texto{
          margin-top: -30px;
          margin-left: -390px;
       }
       p{
+         margin-top: 140px;
          width: 400px;
          font-size: 13px;
       }
@@ -739,11 +761,15 @@ export const CardSobreStyle = styled.div`
          width: 360px;
       }
       h1{
-         margin-top: -15px;
+         margin-top: -2px;
       }
    }
 
    @media screen and (max-width:700px){
+        #fundo-sobre {
+            max-height: 410px;
+        }
+
       #texto{
         margin-left: -400px;
         margin-top: -45px;
@@ -751,21 +777,26 @@ export const CardSobreStyle = styled.div`
       p{
          font-size: 11.5px;
          width: 310px;
+         margin-top: 150px;
+
       }
       h1{
          font-size: 25px;
-         margin-top: -10px;
+         margin-top: 10px;
       }
    }
 
 
 
 @media screen and (max-width:620px){
+    #fundo-sobre {
+        max-height: 390px;
+    }
     #texto{
         margin-top: -50px;
     }
     p{
-      font-size: 10px;
+      font-size: 11px;
       width: 300px;
     }
     h1{
@@ -774,13 +805,11 @@ export const CardSobreStyle = styled.div`
 }
 
 @media screen and (max-width:551px){
-   #texto{
-      /* font-size: 6.9px;
-      margin-left: -390px;
-      margin-top: -30px; */
-   }
+    #fundo-sobre {
+        max-height: 370px;
+    }
    p{
-      font-size: 9px;
+      font-size: 10px;
       width: 265px;
    }
 
@@ -797,8 +826,8 @@ export const ContainerDevs = styled.section`
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
-   justify-content: flex-start;
-   align-items: flex-start;
+   justify-content: space-evenly;
+   /* align-items: flex-start; */
    align-content:space-around;
 
    @media screen and (max-width:551px){
@@ -1070,7 +1099,7 @@ export const IntrodLoginStyle = styled.section`
 
    @media screen and (max-width:655px){
       #balaodefala{
-         margin-left: -100px;
+         margin-left: -20px;
       }
    }
 
