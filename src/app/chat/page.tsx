@@ -14,7 +14,7 @@ export default function Chat(){
     return(
         <ContainerChatStyle className="container">
             <IdentificacaoChat/>
-            <DataAtual data="13/09/2024"/>
+            <DataAtual/>
 
             <ContainerMensagens className="chat">
                 <section className="message bot-message" id="falaChatBot">

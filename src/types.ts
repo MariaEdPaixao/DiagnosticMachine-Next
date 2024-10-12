@@ -10,7 +10,13 @@ export type ConteudoProps = {
 
 export type TituloProps = {
     conteudo: string;
+    fontSize?: string; 
 }
+
+export type TituloStyleProps = {
+    fontSize?: string; // Prop opcional para o tamanho da fonte
+}
+
 
 export type IntrodCarlosProps = {
     conteudo: string;

@@ -1,3 +1,4 @@
+import { TituloStyleProps } from "@/types";
 import styled from "styled-components";
 
 export const FooterStyle = styled.footer`
@@ -404,8 +405,8 @@ export const IntrodStyle = styled.section`
    } */
 `
 
-export const TituloStyle = styled.h1`
-  font-size: 60px;
+export const TituloStyle = styled.h1<TituloStyleProps>`
+  font-size: ${(props) => props.fontSize || '60px'}; // Valor padrão é '60px' se não for passado
   font-weight: 900;
   line-height: 150%;
   text-align: center;  /* Centraliza o texto horizontalmente */
@@ -416,8 +417,12 @@ export const TituloStyle = styled.h1`
   background-clip: text;
   color: transparent;
 
-  @media screen and (max-width: 810px){
+
+  @media screen and (max-width: 950px){
       font-size: 40px;
+  }
+  @media screen and (max-width: 782px){
+    font-size: 38px;
   }
   @media screen and (max-width: 560px){
       font-size: 30px;
@@ -922,7 +927,7 @@ export const ContainerForm = styled.article`
       }
    }
 
-   #entrar {
+   /* #entrar {
       border: none;
       width: 100%;
       height: 52px;
@@ -933,7 +938,7 @@ export const ContainerForm = styled.article`
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       margin-top: 40px;
       cursor: pointer;
-   }
+   } */
 
    #cad {
       display: flex;
@@ -982,9 +987,6 @@ export const ContainerForm = styled.article`
         width: 500px;
         height: 560px;
     
-      h1{
-         font-size: 50px;
-      }
       .email label, .senha label{
          font-size: 22px;
       }
@@ -1170,6 +1172,25 @@ export const IdentificacaoStyle = styled.section`
       }
    }
 
+`
+export const BtnForm = styled.input`
+      border: none;
+      width: 100%;
+      height: 52px;
+      background-color: #1F3E74;
+      color: white;
+      border-radius: 40px;
+      font-size: 24px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin-top: 40px;
+      cursor: pointer;
+
+      @media screen and (max-width: 851px){
+        font-size: 20px;
+        height: 35px;
+        margin-top: 20px;
+      }
+   
 `
 
 export const DataStyle = styled.section`
@@ -1479,3 +1500,27 @@ export const Button = styled.button`
         box-shadow: 5px 8x 8px 0px rgba(0,0,0,1);
     }
 `;
+
+export const FormVeiculoStyle = styled.form`
+    label{
+        font-weight: bold;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .campos{
+        display: flex;
+        flex-direction: column;
+    }
+    .selectStyle{
+        border-radius: 10px;
+        min-height: 40px;
+    }
+
+    option{
+        font-size: 14px;
+    }
+ 
+`

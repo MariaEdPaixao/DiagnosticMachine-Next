@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {ContainerForm} from "../../styles/styled";
+import {BtnForm, ContainerForm} from "../../styles/styled";
 import TituloGeral from "../../components/TituloGeral";
 
 export default function FormLogin() {
@@ -20,11 +20,11 @@ export default function FormLogin() {
                     <div id="esqsenha">
                         <Link href="#">Esqueceu a senha?</Link>
                     </div>
-                    <input type="submit" value="Entrar" id="entrar" />
+                    <BtnForm type="submit" value="Entrar"/>
                 </form>
                 <div id="cad">
                     <p>Ainda não tem uma conta? 
-                        <Link href="#"> Cadastre-se </Link>
+                        <Link href="/cadastro"> Cadastre-se </Link>
                     </p>
                 </div>
             </ContainerForm>
