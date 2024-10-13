@@ -1,14 +1,15 @@
 "use client"
 
-import Link from "next/link";
-// import IntrodLogin from "../../components/IntrodCarlos";
-// import { ContainerLogin } from "../../styles/styled";
-// import FormCadastroVeiculo from "./FormCadastroVeiculo";
-
+import { ContainerFormIntrod } from "@/styles/styled";
+import IntrodCarlos from "../../components/IntrodCarlos";
+import FormCadastro from "./FormCadastro";
 
 export default function Cadastro(){
     return(
-        <Link href='/cadastro/cadastro-veiculo'>cadastro</Link>
+        <ContainerFormIntrod className="container">
+            <IntrodCarlos fala="Vou te guiar nesse processo de cadastramento!!"/>
+            <FormCadastro/>
+        </ContainerFormIntrod>
         
     )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import IntrodCarlos from "./IntrodCarlos"; // "./ -> para sair do arquivo que estou"
+import IntrodCarlos from "./IntrodCarlos2"; // "./ -> para sair do arquivo que estou"
 import { ImgAjuda, SubtituloStyle } from "../../styles/styled";
 import Image from "next/image";
 

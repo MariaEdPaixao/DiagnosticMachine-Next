@@ -14,10 +14,11 @@ export default function FormCadastroVeiculo() {
             <ContainerForm className="item">
                 <TituloGeral conteudo="Cadastre seu veículo" fontSize="45px"/>
             
-                <FormVeiculoStyle action="/chat" method="get">
+                <FormVeiculoStyle action="/login" method="get">
                     <div className="campos">
                         <label htmlFor="idcars">Modelo, Marca</label>
-                        <select name="modelo_marca" id="idcars" className="selectStyle">
+                        <select name="modelo_marca" id="idcars" className="selectStyle" required>
+                            <option value="" selected disabled></option>
                             <option value="volvo">Volvo</option>
                             <option value="saab">Saab</option>
                             <option value="opel">Opel</option>

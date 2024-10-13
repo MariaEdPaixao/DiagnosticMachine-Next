@@ -19,7 +19,7 @@ export function AnoCarro(){
     <div className="campos">
       <label htmlFor="idanoCarro">Ano</label>
       <select id="idanoCarro" value={selectedAno} name="ano" required className="selectStyle">
-        <option value="" disabled>Ano</option>
+        <option value="" disabled selected></option>
         {anos.map((ano) => (
           <option key={ano} value={ano}>
             {ano}

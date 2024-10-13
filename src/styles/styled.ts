@@ -885,7 +885,7 @@ export const ContainerForm = styled.article`
    border-radius: 10px;
    background-color: #D4C5FF;
    width: 500px;
-   height: 560px;
+   min-height: 560px;
    padding: 50px 30px;
    margin-left: 100px;
 
@@ -961,7 +961,7 @@ export const ContainerForm = styled.article`
 
    @media screen and (max-width:1140px){
       width: 300px;
-      height: 560px;
+      min-height: 560px;
       margin-right: 50px;  
    }
 
@@ -985,7 +985,7 @@ export const ContainerForm = styled.article`
         margin: auto;
         margin-top: 20px;
         width: 500px;
-        height: 560px;
+        min-height: 560px;
     
       .email label, .senha label{
          font-size: 22px;
@@ -998,7 +998,7 @@ export const ContainerForm = styled.article`
       }
       #entrar{
          font-size: 20px;
-         height: 35px;
+         min-height: 35px;
          margin-top: 20px;
       }
       #cad p, #cad p a{
@@ -1007,12 +1007,12 @@ export const ContainerForm = styled.article`
    }
    @media screen and (max-width:730px){
          width: 400px;
-         height: 560px;
+         min-height: 560px;
    }
 
 `
 
-export const ContainerLogin = styled.main`
+export const ContainerFormIntrod = styled.main`
    width: 100%;
    min-height: 500px;
    margin: 20px auto; 
@@ -1517,10 +1517,22 @@ export const FormVeiculoStyle = styled.form`
     .selectStyle{
         border-radius: 10px;
         min-height: 40px;
+        padding:4px;
+        border: none;
     }
 
     option{
         font-size: 14px;
     }
  
+`
+
+export const FormCadastroUser = styled.form`
+    label{
+        font-weight: bold;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
 `
