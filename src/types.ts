@@ -35,3 +35,12 @@ export type SobreProps = {
 export type DataProps = {
     data: string;
 }
+
+export type UserType = {
+    // id_usuario: number;
+    nome_completo: string;
+    email: string;
+    // senha: string;
+    data_nasc: string; 
+    telefone: string;
+}

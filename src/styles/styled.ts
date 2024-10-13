@@ -1642,15 +1642,14 @@ export const PerfilInfosStyle = styled.div`
       display: flex;
       flex-direction: column;
     }
-    .selectStyle{
+    .selectStyle, .btn{
         border-radius: px;
         min-height: 40px;
         padding:4px;
-        border: none;
+        border: none; 
     }
 
-    
-   input[type="submit"]{
+    .btn{
       background-color: #021639;
       width: 190px;
       height: 30px;
@@ -1663,7 +1662,7 @@ export const PerfilInfosStyle = styled.div`
       margin-top: 30px;
       cursor:pointer;
       border: none;
-   }
+    }
 
    @media screen and (max-width:765px){
       margin-top: 10px;
