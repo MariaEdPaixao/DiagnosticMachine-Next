@@ -1536,3 +1536,136 @@ export const FormCadastroUser = styled.form`
         margin-bottom: 5px;
     }
 `
+
+export const PerfilStyle = styled.main`
+   width: 100%;
+   min-height: 450px;
+   margin: 20px auto; 
+
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: stretch;
+   align-content: space-around;
+
+   .item{
+      flex: 1 2;
+   }
+
+   .container :nth-child(2) {
+      align-self: center;
+      padding: 10px;
+   }
+
+`
+
+export const PerfilBaseStyle = styled.div`
+   background-color: #D4C5FF;
+   max-width: 450px;
+   min-height: 530px;
+
+   .tituloPerfil{
+      box-shadow: 0px 1px 3px black;
+      background-color: #D4C5FF;
+      height: 58px;
+      /* max-width: 422px; */
+      margin: 0;
+      padding: 10px;
+   }
+   img{
+      max-width: 200px;
+      max-height: 203px;
+      display: block;
+      border-radius: 50%;
+      margin:auto;
+      margin-top: 30px;
+      margin-bottom: 20px;
+   }
+
+   input[type="submit"]{
+      background-color: #021639;
+      min-width: 150px;
+      height: 30px;
+      border-radius: 18px;
+      font-size: 16px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      margin-top: 10px;
+      /* padding: 10px; */
+      cursor:pointer;
+      border: none;
+   }
+   input[type="file"]{
+      padding: 10px;
+   }
+
+   .btnVeiculo{
+      margin-top: 35550px;
+      width: 230px;
+   }
+
+`
+export const PerfilInfosStyle = styled.div`
+   background-color: #D4C5FF;
+   max-width: 450px;
+   min-height: 530px;
+   margin-left: 20px;
+
+   .tituloPerfil{
+      box-shadow: 0px 1px 3px black;
+      background-color: #D4C5FF;
+      height: 58px;
+      margin: 0;
+      padding: 15px;
+      margin-bottom: 20px;
+   }
+
+   label{
+        font-weight: bold;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        color: #021639;
+
+    }
+    .infosC{
+      display: flex;
+   
+    }
+    .campos{
+      padding-left: 20px;
+      padding-right: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .selectStyle{
+        border-radius: px;
+        min-height: 40px;
+        padding:4px;
+        border: none;
+    }
+
+    
+   input[type="submit"]{
+      background-color: #021639;
+      width: 190px;
+      height: 30px;
+      border-radius: 18px;
+      font-size: 16px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      margin-top: 30px;
+      cursor:pointer;
+      border: none;
+   }
+
+   @media screen and (max-width:765px){
+      margin-top: 10px;
+   }
+`

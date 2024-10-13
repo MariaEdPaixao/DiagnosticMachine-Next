@@ -44,8 +44,8 @@ export default function Cabecalho() {
           </ul>
         </div>
         <div className="perfil">
-          <Link href="/"><p>Perfil</p></Link>
-          <Link href="/"><Image src={perfil} alt="perfil" /></Link>
+          <Link href="/perfil"><p>Perfil</p></Link>
+          <Link href="/perfil"><Image src={perfil} alt="perfil" /></Link>
         </div>
 
         <div className="mobile-menu-icon">
@@ -58,8 +58,8 @@ export default function Cabecalho() {
 
       <div className="mobile-menu">
         <div className="perfil">
-          <Link href="/"><Image src={perfil} alt="perfil" /></Link>
-          <Link href="/"><p>Perfil</p></Link>
+          <Link href="/perfil"><Image src={perfil} alt="perfil" /></Link>
+          <Link href="/perfil"><p>Perfil</p></Link>
         </div>
         <div id="linha"></div>
         <ul>
