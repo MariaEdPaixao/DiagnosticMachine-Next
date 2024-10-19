@@ -1,6 +1,7 @@
 import { TituloStyleProps } from "@/types";
 import styled from "styled-components";
 
+
 export const FooterStyle = styled.footer`
 
    margin-top: 30px;
@@ -1581,6 +1582,7 @@ export const PerfilBaseStyle = styled.div`
       margin:auto;
       margin-top: 30px;
       margin-bottom: 20px;
+      /* box-shadow: 2px 1px 50px black; */
    }
 
    input[type="submit"]{

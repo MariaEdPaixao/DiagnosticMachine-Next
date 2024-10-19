@@ -44,3 +44,14 @@ export type UserType = {
     data_nasc: string; 
     telefone: string;
 }
+
+export type ModeloMarcaType = {
+    id: number;
+    marca: string;
+    modelo: string;
+}
+
+export type LoginType = {
+    'email': string;
+    'senha': string;
+}
