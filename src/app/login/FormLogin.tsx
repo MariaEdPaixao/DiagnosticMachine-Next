@@ -34,10 +34,8 @@ export default function FormLogin() {
                 // Salvar o email no localStorage
                 localStorage.setItem("userEmail", login.email);
 
-                alert("deu certo")
                 window.location.href = "/chat";
             } else {
-                alert("deu erro")
                 const errorData = await response.json();
                 setError(errorData.message || "Ocorreu um erro no login."); // Exibe a mensagem de erro do backend
             }

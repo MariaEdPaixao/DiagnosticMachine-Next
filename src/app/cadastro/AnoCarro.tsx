@@ -1,6 +1,7 @@
+import { AnoProps } from '@/types';
 import React, { useState } from 'react';
 
-export function AnoCarro(){
+export function AnoCarro({onChange}:AnoProps){
 
   const [selectedAno, setSelectedAno] = useState<number | undefined>(undefined); // Estado para armazenar o ano selecionado
 
@@ -18,8 +19,8 @@ export function AnoCarro(){
   return (
     <div className="campos">
       <label htmlFor="idanoCarro">Ano</label>
-      <select id="idanoCarro" value={selectedAno} name="ano" required className="selectStyle">
-        <option value="" disabled selected></option>
+      <select id="idanoCarro" value={selectedAno} name="ano" required className="selectStyle" onChange={onChange}>
+        <option value="" disabled selected> Selecione um ano</option>
         {anos.map((ano) => (
           <option key={ano} value={ano}>
             {ano}

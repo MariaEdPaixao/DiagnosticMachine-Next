@@ -4,16 +4,70 @@ import { BtnForm, ContainerForm, FormVeiculoStyle } from "../../styles/styled";
 import TituloGeral from "../../components/TituloGeral";
 import { AnoCarro } from "./AnoCarro";
 import { useState, useEffect } from "react";
-import { ModeloMarcaType } from "@/types";
+import { ModeloMarcaType, VeiculoType } from "@/types";
+import { useRouter } from "next/navigation";
 
 export default function FormCadastroVeiculo() {
+    const navigate = useRouter()
+
     const [modeloMarca, setModeloMarca] = useState<ModeloMarcaType[]>([
         {
-            'id': 0, 
+            'idModeloMarca': 0, 
             'marca': "", 
             'modelo': ""
         }
-    ]); // Inicializa com array vazio
+    ]);
+
+    const [veiculo, setVeiculo] = useState<VeiculoType>({
+        'ano': 0,
+        'placa': "",
+        'id_modelo_marca': 0
+    })
+
+    const [error, setError] = useState<string | null>(null); // Gerencia o estado do erro
+
+    const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target //pegando os valores que vêem  
+        setVeiculo({...veiculo, [name]:value.toUpperCase()})
+    }
+    
+    const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setVeiculo({ ...veiculo, [name]: parseInt(value, 10) });
+    };
+    
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        
+        // Validação de placa antiga e Mercosul
+        const placaRegex = /^[A-Z]{3}\d{4}$|^[A-Z]{3}\d[A-Z]\d{2}$/;
+        if (!placaRegex.test(veiculo.placa)) {
+            setError("Placa inválida. Por favor, siga o formato: ABC1234 (antigo) ou ABC1D23 (Mercosul)");
+            return;
+        }
+
+        const cabecalho = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(veiculo)
+        }
+
+        try{
+            const response = await fetch("http://localhost:8080/veiculoresource/cadastroVeiculo", cabecalho)
+
+            if(response.ok){
+                navigate.push('/chat')
+            }else{
+                const errorData = await response.json();
+                setError(errorData.message || "Ocorreu um erro no login.");
+            }
+
+        }catch(error){
+            console.error("Erro ao realizar login", error);
+            setError("Erro ao conectar com o servidor.");
+        }
+    }
 
     // Função para buscar os dados da API ao carregar o componente
     useEffect(() => {
@@ -36,30 +90,33 @@ export default function FormCadastroVeiculo() {
         fetchModelosMarcas(); 
     }, []);
 
+    
+
     return (
         <ContainerForm className="item">
             <TituloGeral conteudo="Cadastre seu veículo" fontSize="45px" />
 
-            <FormVeiculoStyle action="/login" method="get">
+            <FormVeiculoStyle action="/login" onSubmit={handleSubmit}>
                 <div className="campos">
                     <label htmlFor="idcars">Modelo, Marca</label>
-                    <select name="modelo_marca" id="idcars" className="selectStyle" required>
+                    <select name="id_modelo_marca" id="idcars" className="selectStyle" required  onChange={handleChangeSelect}>
                         <option value="" disabled selected>Selecione um conjunto de marca e modelo</option>
                         {modeloMarca.map((mm, index) => (
-                            <option value={mm.id} key={index}>
+                            <option value={mm.idModeloMarca} key={index}>
                                 {mm.marca}, {mm.modelo} 
                             </option>
                         ))}
                     </select>
                 </div>
                 <div>
-                    <AnoCarro />
+                    <AnoCarro onChange = {handleChangeSelect}/>
                     <div className="campos">
                         <label htmlFor="idplaca"> Placa </label>
-                        <input type="text" name="placa" id="idplaca" placeholder="EX: ABC1D23" className="selectStyle" />
+                        <input type="text" name="placa" id="idplaca" placeholder="EX: ABC1D23" className="selectStyle" onChange={handleChangeInput}/>
                     </div>
                 </div>
-
+                <br />
+                {error && <p style={{ color: "red" }}>{error}</p>}
                 <BtnForm type="submit" value="Cadastrar Veículo" />
             </FormVeiculoStyle>
         </ContainerForm>

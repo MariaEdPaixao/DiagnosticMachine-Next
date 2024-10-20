@@ -36,6 +36,10 @@ export type DataProps = {
     data: string;
 }
 
+export type AnoProps = {
+    onChange: (e:React.ChangeEvent<HTMLSelectElement>) => void
+}
+
 export type UserType = {
     // id_usuario: number;
     nome_completo: string;
@@ -46,12 +50,27 @@ export type UserType = {
 }
 
 export type ModeloMarcaType = {
-    id: number;
+    idModeloMarca: number;
     marca: string;
     modelo: string;
 }
 
-export type LoginType = {
-    'email': string;
-    'senha': string;
+export type VeiculoType = {
+    ano: number;
+    placa: string;
+    id_modelo_marca: number
 }
+
+export type UsuarioType = {
+    email: string;
+    senha:string;
+    nome_completo:string;
+    data_nasc: string;
+    telefone: string;
+}
+
+export type LoginType = {
+    email: string;
+    senha: string;
+}
+
