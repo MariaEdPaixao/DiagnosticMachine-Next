@@ -41,10 +41,8 @@ export type AnoProps = {
 }
 
 export type UserType = {
-    // id_usuario: number;
     nome_completo: string;
     email: string;
-    // senha: string;
     data_nasc: string; 
     telefone: string;
 }
@@ -74,3 +72,9 @@ export type LoginType = {
     senha: string;
 }
 
+export type VeiculoCompletoType = {
+    ano: number;
+    placa: string;
+    modelo: string;
+    marca: string
+}

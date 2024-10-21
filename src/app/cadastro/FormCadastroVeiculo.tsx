@@ -57,7 +57,34 @@ export default function FormCadastroVeiculo() {
             const response = await fetch("http://localhost:8080/veiculoresource/cadastroVeiculo", cabecalho)
 
             if(response.ok){
-                navigate.push('/chat')
+                localStorage.setItem("veiculoPlaca", veiculo.placa);
+                
+                const email = localStorage.getItem("userEmail")
+
+                const response2 = await fetch(`http://localhost:8080/veiculoresource/buscaIdVeiculo/${veiculo.placa}`);
+                const response3 = await fetch(`http://localhost:8080/usuarioresource/buscaIdUsuario/${email}`)
+
+                if (response2.ok && response3.ok){
+                    const idVeiculo = await response2.json(); 
+                    const idUsuario = await response3.json();
+
+                    const responseAssociar = await fetch(`http://localhost:8080/veiculoresource/associacaoUserVeiculo/${idUsuario}/${idVeiculo}`)
+
+                    if(responseAssociar.ok){
+                        localStorage.setItem("idVeiculo", idVeiculo)
+                        localStorage.setItem("idUsuario", idUsuario)
+
+                        navigate.push('/chat')
+                    }else {
+                        console.error("Erro ao associar o usuário e o veiculo", error);
+                        setError("Erro ao associar o usuário e o veiculo");
+                    }
+
+                } else {
+                    console.error("Erro ao buscar o id do veículo", error);
+                    setError("Erro ao buscar o id do veículo");
+                }
+                
             }else{
                 const errorData = await response.json();
                 setError(errorData.message || "Ocorreu um erro no login.");

@@ -36,6 +36,7 @@ export default function FormCadastro(){
                const response = await fetch("http://localhost:8080/usuarioresource/cadastroUsuario", cabecalho)
           
                if(response.ok){
+                    localStorage.setItem("userEmail", usuario.email);
                     navigate.push('/cadastro/cadastro-veiculo')
                }else{
                     const errorData = await response.json()
@@ -43,7 +44,9 @@ export default function FormCadastro(){
                }
           
           }catch(error){
-               console.error(error)
+               console.error("Erro ao realizar login", error);
+               setError("Erro ao conectar com o servidor.");
+               alert(usuario.data_nasc +  " | " + usuario.email + " | " + usuario.nome_completo + " | " + usuario.senha + " | " + usuario.telefone)
           }
      }
 
@@ -62,7 +65,7 @@ export default function FormCadastro(){
                 </div>
                 <div className="campos">
                      <label htmlFor="idnome">Nome Completo</label>
-                     <input type="text" name="nome" id="idnome" placeholder="Insira seu nome completo" className="selectStyle" onChange={handleChangeInput} required/>
+                     <input type="text" name="nome_completo" id="idnome" placeholder="Insira seu nome completo" className="selectStyle" onChange={handleChangeInput} required/>
                 </div>
                 <div className="campos">
                      <label htmlFor="idtelefone">Telefone</label>
@@ -70,7 +73,7 @@ export default function FormCadastro(){
                 </div>
                 <div className="campos">
                      <label htmlFor="idata">Data de Nascimento</label>
-                     <input type="date" name="data" id="idata" placeholder="+5511999999999" className="selectStyle" onChange={handleChangeInput} required/>
+                     <input type="date" name="data_nasc" id="idata" placeholder="+5511999999999" className="selectStyle" onChange={handleChangeInput} required/>
                 </div>
 
                <br />
