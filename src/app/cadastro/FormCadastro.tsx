@@ -36,7 +36,7 @@ export default function FormCadastro(){
                const response = await fetch("http://localhost:8080/usuarioresource/cadastroUsuario", cabecalho)
           
                if(response.ok){
-                    localStorage.setItem("userEmail", usuario.email);
+                    sessionStorage.setItem("userEmail", usuario.email);
                     navigate.push('/cadastro/cadastro-veiculo')
                }else{
                     const errorData = await response.json()

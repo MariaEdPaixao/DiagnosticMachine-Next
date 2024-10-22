@@ -1,8 +1,29 @@
-import { PerfilInfosStyle } from "@/styles/styled";
+import Modal from "@/components/Modal";
+import { ModalErrorStyle, ModalSuccessStyle, PerfilInfosStyle } from "@/styles/styled";
 import { UserType } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
+import { VscError } from "react-icons/vsc";
 
 export default function InfosUser(){
+
+    const [errorData, setErrorData] = useState(""); 
+
+    // Função para formatar a data de "2004-10-25 00:00:00" para "2004-10-25"
+    const formatDateToInput = (dateString: string) => {
+        return dateString.split(" ")[0]; // Mantém apenas a data (primeira parte da string)
+    };
+
+    const primeiro_nome = () => {
+        if (user && user.nome_completo) {
+            const nome_lista = user.nome_completo.split(" "); 
+            return nome_lista[0]; 
+        }
+        return ""; // Retorna uma string vazia se 'user.nome_completo' não estiver definido
+    }
+
+    const [open, setOpen] = useState<boolean>(false)
+    const [openError, setOpenError] = useState<boolean>(false)
 
     const [user, setUser] = useState<UserType>({
         nome_completo: "",
@@ -17,16 +38,45 @@ export default function InfosUser(){
 
     }
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        const cabecalho = {
+            method: 'PUT',
+            headers: {"Content-Type" : "application/json"},
+            body: JSON.stringify(user)
+        }
         try{
-            const email = localStorage.getItem("userEmail")
+            const response = await fetch(`http://localhost:8080/usuarioresource/atualizaDados/${user.email}`, cabecalho)
+            if(response.ok){
+                setOpen(true)
+                // alert("Perfil atualizado com sucesso!")
+                
+            }else{
+                const errorDataJson = await response.json();
+                setErrorData(errorDataJson.message)
+                setOpenError(true)
+            }
+        }catch(error){
+            console.error("Erro ao realizar login", error);
+            alert("Erro ao conectar com o servidor.");
+        }
+    }
+
+    const fetchUserData = async () => {
+        try{
+            const email = sessionStorage.getItem("userEmail")
             const response = await fetch(`http://localhost:8080/usuarioresource/exibirUsuario/${email}`)
 
             if(response.ok){
                 const dadosUser = await response.json()
+                
+                // Verificando se data_nasc precisa ser formatada
+                if (dadosUser.data_nasc) {
+                    dadosUser.data_nasc = formatDateToInput(dadosUser.data_nasc);
+                }
                 setUser(dadosUser) 
+                
             } else {
                 const errorData = await response.json();
                 alert(errorData.message || "Ocorreu um erro");
@@ -38,11 +88,15 @@ export default function InfosUser(){
         }
     }
 
+    useEffect(() =>{
+        fetchUserData();
+    }, [])
+
     return(
         <div>
             <PerfilInfosStyle>
                 <div className="tituloPerfil">
-                    <h2>Olá, <span>fulana(o)</span>. Veja seus dados</h2>
+                    <h2>Olá, <span>{primeiro_nome()}</span>. Veja seus dados</h2>
                 </div>
 
                 <form onSubmit={handleSubmit}>
@@ -57,7 +111,7 @@ export default function InfosUser(){
                     <div className="infosC">
                         <div className="campos">
                             <label htmlFor="idtelefone">Telefone: </label>
-                            <input type="text" name="telefone" id="idemail" className="selectStyle" value={user.telefone} onChange={handleChange}/>
+                            <input type="text" name="telefone" id="idtelefone" className="selectStyle" value={user.telefone}  maxLength={14} onChange={handleChange}/>
                         </div>
                         <div className="campos">
                             <label htmlFor="iddate">Data de Nascimento: </label>
@@ -66,8 +120,32 @@ export default function InfosUser(){
                     </div>
                     <input type="submit" value="Alterar informações" className="btn"/>
                 </form>
-    
-        </PerfilInfosStyle>
+            </PerfilInfosStyle>
+
+            <Modal open={open} onClose={() => setOpen(false)}>
+                <ModalSuccessStyle>
+                    <div className="containerText">
+                        <FaCheckCircle className="icon-success"/>
+                        <h3 className="title" >Sucesso!</h3>
+                        <p className="descricao">Seus dados foram atualizados.</p>
+                    </div>
+                    
+                    <button className="btnCancelar btn" onClick={()=>setOpen(false)}>OKAY</button>
+                 
+                </ModalSuccessStyle>
+            </Modal>
+                <Modal open={openError} onClose={() => setOpenError(false)}>
+                    <ModalErrorStyle>
+                        <div className="containerText">
+                            <VscError  className="icon-error"/>
+                            <h3 className="title" >Erro!</h3>
+                            <p className="descricao">{errorData}</p>
+                        </div>
+                        
+                        <button className="btnCancelar btn" onClick={()=>{setOpenError(false); window.location.reload();}}>OKAY</button>
+                 
+                </ModalErrorStyle>
+            </Modal>
         </div>
     )
 }

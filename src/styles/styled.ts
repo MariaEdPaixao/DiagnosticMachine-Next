@@ -1670,3 +1670,255 @@ export const PerfilInfosStyle = styled.div`
       margin-top: 10px;
    }
 `
+
+export const LogoutStyle = styled.div`
+
+   display: flex;
+   justify-content: end;
+   margin-right: 22%;
+   margin-top: 10px;
+
+   #icon-logout{
+      font-size: 38px;
+      cursor: pointer;
+   }
+   #icon-logout:hover{
+      box-shadow: 2px 2px 2px black;
+      border-radius: 12px;
+      color: #600000;
+   }
+
+`
+export const DeleteStyle = styled.div`
+
+   display: flex;
+   justify-content: end;
+   margin-top: 10px;
+   margin-right: 5%;
+
+   #icon-delete{
+      font-size: 32px;
+      cursor: pointer;
+   }
+   #icon-delete:hover{
+      box-shadow: 2px 2px 2px black;
+      border-radius: 12px;
+      color: #600000;
+   }
+
+`
+
+export const ModalOverlay = styled.div<{ open: boolean }>`
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ open }) => (open ? "rgba(0, 0, 0, 0.2)" : "transparent")};
+  transition: background-color 0.3s ease;
+  visibility: ${({ open }) => (open ? "visible" : "hidden")};
+`;
+
+export const ModalContent = styled.div<{ open: boolean }>`
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+  transform: ${({ open }) => (open ? "scale(1)" : "scale(1.25)")};
+  opacity: ${({ open }) => (open ? 1 : 0)};
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+  color: #9ca3af; 
+  background-color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #f9fafb; 
+    color: #4b5563; 
+  }
+`;
+
+export const ModalDeleteStyle = styled.div`
+   .containerText{
+      text-align: center;
+      width: 14rem;
+   }
+
+   .icon-delete{
+      margin: 0 auto;
+      color: #f56565; 
+   }
+
+   .title{
+   font-size: 1.125rem; 
+   font-weight: 900; 
+   color: #2d3748; 
+   }
+
+   .descricao{
+   color: #a0aec0; 
+   font-size: 0.875rem; 
+   }
+
+   .containerBtns{
+   display: flex;
+   gap: 1rem; 
+   margin-top: 10px;
+   }
+
+   .btnDelete{
+   background-color: #e53e3e; 
+   color: white;
+   width: 100%; 
+   padding: 0.5rem;
+   border-radius: 0.25rem;
+   cursor: pointer;
+
+   &:hover {
+      background-color: #c53030;
+   }
+   }
+
+   .btn{
+      display: flex;
+   gap: 0.5rem; 
+   align-items: center;
+   justify-content: center;
+   padding: 0.5rem 1rem; 
+   font-weight: 600; 
+   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+   border-radius: 0.5rem; 
+   cursor: pointer;
+   }
+
+   .btnCancelar{
+   background-color: #f7fafc; 
+   color: #4a5568;  
+   width: 100%; 
+   padding: 0.5rem;
+   border-radius: 0.25rem;
+   cursor: pointer;
+
+   &:hover {
+      background-color: #edf2f7;
+   }
+   }
+
+`
+
+export const ModalSuccessStyle = styled.div`
+
+   .containerText{
+      text-align: center;
+      width: 14rem;
+   }
+   .icon-success{
+      margin: 0 auto;
+      color: #5cb85c; 
+      font-size: 50px;
+   }
+
+   .title{
+   font-size: 1.125rem; 
+   font-weight: 900; 
+   color: #2d3748; 
+   margin-bottom: 10px;
+   }
+
+   .descricao{
+   color: #a0aec0; 
+   font-size: 0.875rem; 
+   margin-bottom: 10px;
+   }
+
+   .btnCancelar{
+      background-color: #f7fafc; 
+      color: #4a5568;  
+      width: 80%; 
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      
+
+      &:hover {
+         background-color: #edf2f7;
+      }
+   }
+
+   .btn{
+      display: flex;
+      gap: 0.5rem; 
+      
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem; 
+      font-weight: 600; 
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+      border-radius: 1rem; 
+      cursor: pointer;
+   }
+
+`
+
+export const ModalErrorStyle = styled.div`
+   .containerText{
+      text-align: center;
+      width: 14rem;
+   }
+   .icon-error{
+      margin: 0 auto;
+      color: #CC3300; 
+      font-size: 50px;
+   }
+
+   .title{
+   font-size: 1.125rem; 
+   font-weight: 900; 
+   color: #CC3300; 
+   margin-bottom: 10px;
+   }
+
+   .descricao{
+   color: #a0aec0; 
+   font-size: 0.875rem; 
+   margin-bottom: 10px;
+   }
+
+   .btnCancelar{
+      background-color: #f7fafc; 
+      color: #4a5568;  
+      width: 80%; 
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      
+
+      &:hover {
+         background-color: #edf2f7;
+      }
+   }
+
+   .btn{
+      display: flex;
+      gap: 0.5rem; 
+      
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem; 
+      font-weight: 600; 
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+      border-radius: 1rem; 
+      cursor: pointer;
+   }
+
+
+`

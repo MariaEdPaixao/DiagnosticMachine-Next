@@ -1,10 +1,20 @@
 import Link from "next/link";
-import { BtnForm, ContainerForm } from "../../styles/styled";
+import { BtnForm, ContainerForm, ModalErrorStyle, ModalSuccessStyle } from "../../styles/styled";
 import TituloGeral from "../../components/TituloGeral";
 import { useState } from "react";
-import { LoginType } from "@/types";
+import { LoginType, VeiculoType } from "@/types";
+import { useRouter } from "next/navigation";
+import Modal from "@/components/Modal";
+import { FaCheckCircle } from "react-icons/fa";
+import { VscError } from "react-icons/vsc";
 
 export default function FormLogin() {
+
+    const navigate = useRouter()
+
+    const [open, setOpen] = useState<boolean>(false)
+    const [openError, setOpenError] = useState<boolean>(false)
+
     const [login, setLogin] = useState<LoginType>({
         'email': "",
         'senha': ""
@@ -30,11 +40,43 @@ export default function FormLogin() {
             const response = await fetch("http://localhost:8080/usuarioresource/login", cabecalho);
             
             if (response.ok) {
-                // Login bem-sucedido
-                // Salvar o email no localStorage
-                localStorage.setItem("userEmail", login.email);
+                const response2 = await fetch(`http://localhost:8080/usuarioresource/buscaIdUsuario/${login.email}`)
+                if(response2.ok){
+                    const idUsuario = await response2.json();
 
-                window.location.href = "/chat";
+                    const response3 = await fetch(`http://localhost:8080/veiculoresource/exibirVeiculo/${idUsuario}`)
+                    if(response3.ok){
+                        // Convertendo a resposta para JSON com tipagem e pagando somente a placa
+                        const data: VeiculoType = await response3.json();
+                        const placa: string = data.placa;
+
+                        const response4 = await fetch(`http://localhost:8080/veiculoresource/buscaIdVeiculo/${placa}`)
+
+                        if(response4.ok){
+                            const idVeiculo = await response4.json()
+                            sessionStorage.setItem("userEmail", login.email)
+                            sessionStorage.setItem("idVeiculo", idVeiculo)
+                            sessionStorage.setItem("idUsuario", idUsuario) 
+
+                            setOpen(true)
+                            setTimeout(() => {
+                                navigate.push('/chat'); // Redireciona após 2 segundos
+                            }, 2000);
+                        }
+                    }else{
+                        sessionStorage.clear()
+                        sessionStorage.setItem("userEmail", login.email)
+                        setOpenError(true)
+                        
+                        setTimeout(() => {
+                            navigate.push('/cadastro/cadastro-veiculo') // Redireciona após 2 segundos
+                        }, 2000);
+                    }
+                }else{
+                    const errorData = await response.json();
+                    setError(errorData.message || "Erro ao buscar a placa");
+                }
+                
             } else {
                 const errorData = await response.json();
                 setError(errorData.message || "Ocorreu um erro no login."); // Exibe a mensagem de erro do backend
@@ -89,6 +131,33 @@ export default function FormLogin() {
                     Ainda não tem uma conta? <Link href="/cadastro"> Cadastre-se </Link>
                 </p>
             </div>
+
+            {/* POPUPS DE ERROS E SUCESSO */}
+            <Modal open={open} onClose={() => setOpen(false)}>
+                <ModalSuccessStyle>
+                    <div className="containerText">
+                        <FaCheckCircle className="icon-success"/>
+                        <h3 className="title" >Sucesso!</h3>
+                        <p className="descricao">Acesso liberado.</p>
+                    </div>
+                    
+                    <button className="btnCancelar btn" onClick={()=>setOpen(false)}>OKAY</button>
+                 
+                </ModalSuccessStyle>
+            </Modal>
+                <Modal open={openError} onClose={() => setOpenError(false)}>
+                    <ModalErrorStyle>
+                        <div className="containerText">
+                            <VscError  className="icon-error"/>
+                            <h3 className="title" >Erro!</h3>
+                            <p className="descricao">Você deve primeiro cadastrar um veículo.</p>
+                        </div>
+                        
+                        <button className="btnCancelar btn" onClick={()=>setOpenError(false)}>OKAY</button>
+                 
+                    </ModalErrorStyle>
+            </Modal>
+
         </ContainerForm>
     );
 }

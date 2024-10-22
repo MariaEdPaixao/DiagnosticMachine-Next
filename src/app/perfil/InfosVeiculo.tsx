@@ -1,6 +1,6 @@
 import { PerfilInfosStyle } from "@/styles/styled";
 import { VeiculoCompletoType } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function InfosVeiculo(){
 
@@ -16,12 +16,14 @@ export default function InfosVeiculo(){
         setVeiculo({...veiculo,[name]:value})
     }
 
-    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
 
+    const fetchUserData = async () => {
         try{
-            const idUser = localStorage.getItem("idUser")
-            const response = await fetch(`http://localhost:8080/veiculoresource/exibirVeiculo/${idUser}`)
+            const idUsuario = sessionStorage.getItem("idUsuario");
+            const parsedIdUsuario = idUsuario ? parseInt(idUsuario, 10) : null;
+
+ 
+            const response = await fetch(`http://localhost:8080/veiculoresource/exibirVeiculo/${parsedIdUsuario}`)
 
             if(response.ok){
                 const dadosVeiculo = await response.json()
@@ -38,12 +40,16 @@ export default function InfosVeiculo(){
 
     }
 
+    useEffect(() =>{
+        fetchUserData();
+    }, [])
+
     return(
         <PerfilInfosStyle>
             <div className="tituloPerfil">
                 <h2>Dados do seu veículo: </h2>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div className="campos">
                     <label htmlFor="idmarca">Marca: </label>
                     <input type="text" name="marca" id="idmarca" className="selectStyle" value={veiculo.marca} readOnly onChange={handleChange}/>

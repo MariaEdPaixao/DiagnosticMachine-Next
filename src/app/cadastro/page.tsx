@@ -3,8 +3,9 @@
 import { ContainerFormIntrod } from "@/styles/styled";
 import IntrodCarlos from "../../components/IntrodCarlos";
 import FormCadastro from "./FormCadastro";
+import WithAuthRedirect from "./../../components/WithAuthRedirect";
 
-export default function Cadastro(){
+function Cadastro(){
     return(
         <ContainerFormIntrod className="container">
             <IntrodCarlos fala="Vou te guiar nesse processo de cadastramento!!"/>
@@ -14,3 +15,4 @@ export default function Cadastro(){
     )
 }
 
+export default WithAuthRedirect(Cadastro)

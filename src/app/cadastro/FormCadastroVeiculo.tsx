@@ -29,6 +29,7 @@ export default function FormCadastroVeiculo() {
     const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target //pegando os valores que vêem  
         setVeiculo({...veiculo, [name]:value.toUpperCase()})
+
     }
     
     const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -57,9 +58,9 @@ export default function FormCadastroVeiculo() {
             const response = await fetch("http://localhost:8080/veiculoresource/cadastroVeiculo", cabecalho)
 
             if(response.ok){
-                localStorage.setItem("veiculoPlaca", veiculo.placa);
+                sessionStorage.setItem("veiculoPlaca", veiculo.placa);
                 
-                const email = localStorage.getItem("userEmail")
+                const email = sessionStorage.getItem("userEmail")
 
                 const response2 = await fetch(`http://localhost:8080/veiculoresource/buscaIdVeiculo/${veiculo.placa}`);
                 const response3 = await fetch(`http://localhost:8080/usuarioresource/buscaIdUsuario/${email}`)
@@ -71,10 +72,10 @@ export default function FormCadastroVeiculo() {
                     const responseAssociar = await fetch(`http://localhost:8080/veiculoresource/associacaoUserVeiculo/${idUsuario}/${idVeiculo}`)
 
                     if(responseAssociar.ok){
-                        localStorage.setItem("idVeiculo", idVeiculo)
-                        localStorage.setItem("idUsuario", idUsuario)
-
-                        navigate.push('/chat')
+                        sessionStorage.setItem("idVeiculo", idVeiculo);
+                        sessionStorage.setItem("idUsuario", idUsuario);
+                        
+                        navigate.push('/chat');
                     }else {
                         console.error("Erro ao associar o usuário e o veiculo", error);
                         setError("Erro ao associar o usuário e o veiculo");
