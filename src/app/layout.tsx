@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+// import "./globals.css";
+import GlobalStyle from "@/styles/global-styled";
 
 import { HeaderFooter } from "@/components/Header&Footer";
 
@@ -28,8 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <GlobalStyle />
         <HeaderFooter>
+        <div className="main-content">
             {children}
+        </div>
         </HeaderFooter>
       </body>
     </html>

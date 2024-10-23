@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Cabecalho from "@/components/Cabecalho";
 import Rodape from "@/components/Rodape"; 
 import { ReactNode } from "react"; 
+import { HeaderFooterContainer, MainContent } from "@/styles/styled";
 
 export function HeaderFooter ({ children }: { children: ReactNode }) {
   const pathname = usePathname(); // Obtém o caminho atual da URL.
@@ -14,11 +15,13 @@ export function HeaderFooter ({ children }: { children: ReactNode }) {
                            pathname === "/cadastro/cadastro-veiculo";
 
   return (
-    <>
+    <HeaderFooterContainer>
       {/* Renderiza o Cabeçalho apenas se a rota não for indesejada */}
       {!rotasIndesejadas && <Cabecalho />}
-      {children} 
+      <MainContent>
+          {children} 
+      </MainContent>
       {!rotasIndesejadas && <Rodape />}
-    </>
+    </HeaderFooterContainer>
   );
 }

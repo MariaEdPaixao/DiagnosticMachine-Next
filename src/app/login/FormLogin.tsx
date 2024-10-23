@@ -60,7 +60,7 @@ export default function FormLogin() {
 
                             setOpen(true)
                             setTimeout(() => {
-                                navigate.push('/chat'); // Redireciona após 2 segundos
+                                navigate.push('/perfil'); // Redireciona após 2 segundos
                             }, 2000);
                         }
                     }else{

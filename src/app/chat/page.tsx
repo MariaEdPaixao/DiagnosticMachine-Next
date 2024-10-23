@@ -20,10 +20,9 @@ export default function Chat() {
 
     useEffect(() => {
         const userEmail = sessionStorage.getItem("userEmail");
-        const veiculoPlaca = sessionStorage.getItem("veiculoPlaca");
 
         // Verifica se ambos estão presentes
-        if (userEmail && veiculoPlaca) {
+        if (userEmail){
             setIsLoggedIn(true); // Usuário logado
         } else {
             setShowModal(true); // Exibe o modal de login obrigatório
@@ -35,6 +34,9 @@ export default function Chat() {
     };
 
     if (showModal) {
+        setTimeout(() => {
+            navigate.push('/') // Redireciona após 2 segundos
+        }, 2000);
         // Exibe o modal de login obrigatório
         return (
             <Modal open={showModal} onClose={() => setShowModal(false)}>
@@ -47,6 +49,7 @@ export default function Chat() {
                 </ModalErrorStyle>
             </Modal>
         );
+       
     }
 
     if (!isLoggedIn) {

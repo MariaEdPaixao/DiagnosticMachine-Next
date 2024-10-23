@@ -81,7 +81,7 @@ export default function FormCadastroVeiculo() {
                         
                         setOpen(true)
                         setTimeout(() => {
-                            navigate.push('/chat') // Redireciona após 2 segundos
+                            navigate.push('/perfil') // Redireciona após 2 segundos
                         }, 2000);
                     }else {
                         console.error("Erro ao associar o usuário e o veiculo", error);

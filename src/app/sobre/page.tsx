@@ -16,8 +16,7 @@ const devs: SobreProps[] = [
     {id: 1, rm_turma: 'RM 555136 | 1TDSPK', nome: 'Larissa Freitas', foto: larissaImg, github: 'https://github.com/MariaEdPaixao/DiagnosticMachine-Next/commits/main/', linkedin:'#'},
     {id: 2, rm_turma: 'RM 558832 | 1TDSPK', nome: 'Maria Paixão', foto: mariaImg, github: 'https://github.com/MariaEdPaixao', linkedin:'https://linkedin.com/in/maria-eduarda-alves-da-paixão-6267a1303'},
     {id: 3, rm_turma: 'RM 555181 | 1TDSPK', nome: 'Luis Carlos', foto: luisImg, github: 'https://github.com/MariaEdPaixao/DiagnosticMachine-Next/commits/main/', linkedin:'#'},
-    
-  ];
+];
 
 
 export default function Sobre(){

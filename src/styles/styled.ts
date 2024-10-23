@@ -121,7 +121,6 @@ export const HeaderStyle = styled.header`
       color: white;
    }
 
-
    .mobile-menu-icon {
       display: none;
    }
@@ -833,7 +832,6 @@ export const ContainerDevs = styled.section`
    flex-direction: row;
    flex-wrap: wrap;
    justify-content: space-evenly;
-   /* align-items: flex-start; */
    align-content:space-around;
 
    @media screen and (max-width:551px){
@@ -1039,6 +1037,16 @@ export const ContainerFormIntrod = styled.main`
    }
 
 `
+
+export const MainContent = styled.main`
+    flex-grow: 1; /* Faz o conteúdo principal crescer para preencher o espaço */
+`;
+
+export const HeaderFooterContainer = styled.div`
+  display: flex;
+  flex-direction: column; /* Coloca os elementos em coluna */
+  min-height: 100vh; /* Garante que o container ocupe toda a altura da viewport */
+`;
 
 export const IntrodLoginStyle = styled.section`
    margin-top: 40px;
@@ -1420,7 +1428,6 @@ export const InteragirChatStyle = styled.article`
 
 `
 export const ContainerChatStyle = styled.main`
-
     display: grid;
     overflow-y: auto;
 
@@ -1453,8 +1460,8 @@ export const ContainerChatStyle = styled.main`
       grid-area: envioMensagem;
    }
 
-
-
+   height: 100%;
+   flex-grow: 1;
 
 `
 
@@ -1920,5 +1927,112 @@ export const ModalErrorStyle = styled.div`
       cursor: pointer;
    }
 
+
+`
+
+export const HomeMain = styled.main`
+   img{
+      width: 100%;
+      height: 430px;
+      margin-bottom: 10px;
+   }
+
+   .descricao{
+      width: 830px;      
+      margin: auto;     
+      text-align: center; 
+   }
+
+   .services{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      margin-top: 40px;
+      margin-bottom: 40px;
+   }
+
+   .services-descricao{
+      width: 200px;
+      text-align: center;
+   }
+
+   .icons{
+      width: 123px;
+      height: 120px;
+   }
+
+   .feedbacks{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      margin-top: 40px;
+      margin-bottom: 40px;
+   }
+  
+   @media screen and (max-width: 840px){
+      .descricao p{
+         width: 720px;  
+      }
+   }
+
+   @media screen and (max-width: 750px){
+      img{
+         height: 300px;
+      }
+   }
+
+   @media screen and (max-width: 730px){
+      .descricao p{
+         font-size : 14px;
+         width: 600px; 
+         margin-left: 5%;
+      }
+   }
+
+   @media screen and (max-width:664px){
+      .descricao p{
+         font-size : 12px;
+         width: 450px; 
+         margin-left: 10%;
+      }
+   }
+
+   @media screen and (max-width:560px){
+      .descricao p{
+         font-size : 12px;
+         width: 400px; 
+         margin-left:5%;
+      }
+   }
+
+
+`
+
+export const CardFeedbackStyle = styled.div`
+   width: 280px;
+   height: 233px;
+   background-color: #D7EFFC;
+   box-shadow: 3px 10px 8px black;
+
+   .icon-aspas{
+      margin-top: 15px;
+      width:40px;
+      height:40px;
+   }
+
+   .feedback-conjunto{
+      text-align: center;
+      margin: auto;
+      width: 230px;
+   }
+   .feedback-conjunto h2{
+      margin-bottom: 10px;
+   }
+
+   @media screen and (max-width: 850px){
+      margin-bottom: 20px;
+   }
 
 `

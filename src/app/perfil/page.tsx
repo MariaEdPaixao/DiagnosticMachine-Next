@@ -24,6 +24,7 @@ export default function Perfil(){
 
     const handleLogout = () => {
         sessionStorage.clear()
+        window.location.reload()
         navigate.push('/')
     }
 
@@ -49,9 +50,8 @@ export default function Perfil(){
 
     useEffect(() => {
         const email = sessionStorage.getItem("userEmail")
-        const placa = sessionStorage.getItem("veiculoPlaca")
 
-        if(email && placa){
+        if(email){
             setIsProfile(true)
         }else{
             setShowModal(true)
@@ -63,6 +63,9 @@ export default function Perfil(){
     };
 
     if (showModal) {
+        setTimeout(() => {
+            navigate.push('/') // Redireciona após 2 segundos
+        }, 2000);
         // Exibe o modal de login obrigatório
         return (
             <Modal open={showModal} onClose={() => setShowModal(false)}>

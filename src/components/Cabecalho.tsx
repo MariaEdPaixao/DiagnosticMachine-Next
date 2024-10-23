@@ -2,7 +2,7 @@
 
 import { HeaderStyle } from "@/styles/styled";
 import Link from "next/link";
-import { useState } from "react"; 
+import { useEffect, useState } from "react"; 
 
 // Imagens
 import Image from "next/image";
@@ -14,6 +14,8 @@ import menu from "../assets/img/icones/mobile/menu_white_36dp.svg";
 export default function Cabecalho() {
   // Definir estado para controlar qual ícone exibir
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [logado, setLogado] = useState<boolean>(false)
 
   const menuShow = () => {
     const menuMobile = document.querySelector(".mobile-menu") as HTMLElement | null;
@@ -29,11 +31,22 @@ export default function Cabecalho() {
     }
   };
 
+  useEffect(() => {
+      const email = sessionStorage.getItem("userEmail")
+
+      if(email){
+        setLogado(true)
+      }else{
+        setLogado(false)
+      }
+  }, [])
+
+
   return (
     <HeaderStyle>
       <nav className="nav-bar">
         <div className="logo">
-          <Image src={Logo} alt="logo da página" height={90} />
+          <Link href={'/'}> <Image src={Logo} alt="logo da página" height={90} /> </Link>
         </div>
         <div className="nav-list">
           <ul>
@@ -44,8 +57,18 @@ export default function Cabecalho() {
           </ul>
         </div>
         <div className="perfil">
-          <Link href="/perfil"><p>Perfil</p></Link>
-          <Link href="/perfil"><Image src={perfil} alt="perfil" /></Link>
+          {
+            logado ? (
+              <>
+                <Link href="/perfil">
+                  <p>Perfil</p>
+                </Link>
+              </>
+            ) : (
+              <Link href="/login"><p>Login</p></Link>
+            )
+          }
+          <Link href="/perfil"><Image src={perfil} alt="perfil" /></Link>  
         </div>
 
         <div className="mobile-menu-icon">
@@ -59,7 +82,17 @@ export default function Cabecalho() {
       <div className="mobile-menu">
         <div className="perfil">
           <Link href="/perfil"><Image src={perfil} alt="perfil" /></Link>
-          <Link href="/perfil"><p>Perfil</p></Link>
+          {
+            logado ? (
+              <>
+                <Link href="/perfil">
+                  <p>Perfil</p>
+                </Link>
+              </>
+            ) : (
+              <Link href="/login"><p>Login</p></Link>
+            )
+          }
         </div>
         <div id="linha"></div>
         <ul>
