@@ -1,14 +1,18 @@
 "use client";
 
-import { BtnForm, ContainerForm, FormVeiculoStyle } from "../../styles/styled";
+import { BtnForm, ContainerForm, FormVeiculoStyle, ModalSuccessStyle } from "../../styles/styled";
 import TituloGeral from "../../components/TituloGeral";
 import { AnoCarro } from "./AnoCarro";
 import { useState, useEffect } from "react";
 import { ModeloMarcaType, VeiculoType } from "@/types";
 import { useRouter } from "next/navigation";
+import { FaCheckCircle } from "react-icons/fa";
+import Modal from "@/components/Modal";
 
 export default function FormCadastroVeiculo() {
     const navigate = useRouter()
+
+    const [open, setOpen] = useState<boolean>(false)
 
     const [modeloMarca, setModeloMarca] = useState<ModeloMarcaType[]>([
         {
@@ -75,7 +79,10 @@ export default function FormCadastroVeiculo() {
                         sessionStorage.setItem("idVeiculo", idVeiculo);
                         sessionStorage.setItem("idUsuario", idUsuario);
                         
-                        navigate.push('/chat');
+                        setOpen(true)
+                        setTimeout(() => {
+                            navigate.push('/chat') // Redireciona após 2 segundos
+                        }, 2000);
                     }else {
                         console.error("Erro ao associar o usuário e o veiculo", error);
                         setError("Erro ao associar o usuário e o veiculo");
@@ -147,6 +154,18 @@ export default function FormCadastroVeiculo() {
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 <BtnForm type="submit" value="Cadastrar Veículo" />
             </FormVeiculoStyle>
+            <Modal open={open} onClose={() => setOpen(false)}>
+                <ModalSuccessStyle>
+                    <div className="containerText">
+                        <FaCheckCircle className="icon-success"/>
+                        <h3 className="title" >Sucesso!</h3>
+                        <p className="descricao">Veículo cadastrado e associado à sua conta.</p>
+                    </div>
+                    
+                    <button className="btnCancelar btn" onClick={()=>setOpen(false)}>OKAY</button>
+                 
+                </ModalSuccessStyle>
+            </Modal>
         </ContainerForm>
     );
 }

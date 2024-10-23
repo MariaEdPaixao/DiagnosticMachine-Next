@@ -17,6 +17,7 @@ export default function InfosUser(){
     const primeiro_nome = () => {
         if (user && user.nome_completo) {
             const nome_lista = user.nome_completo.split(" "); 
+            sessionStorage.setItem("nomeUser", nome_lista[0])
             return nome_lista[0]; 
         }
         return ""; // Retorna uma string vazia se 'user.nome_completo' não estiver definido

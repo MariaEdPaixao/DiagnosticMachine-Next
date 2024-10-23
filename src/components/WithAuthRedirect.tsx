@@ -12,7 +12,7 @@ const withAuthRedirect = <P extends object>(
       // Verificar se estamos no lado do cliente
       if (typeof window !== 'undefined') {
         const userEmail = sessionStorage.getItem('userEmail');
-        const placa = sessionStorage.getItem('placa');
+        const placa = sessionStorage.getItem('veiculoPlaca');
 
         // Redirecionar somente se o userEmail e a placa existirem no sessionStorage
         if (userEmail && placa) {

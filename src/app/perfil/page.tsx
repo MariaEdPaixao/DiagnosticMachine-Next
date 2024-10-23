@@ -1,7 +1,7 @@
 "use client"
 
-import { DeleteStyle, LogoutStyle, ModalDeleteStyle, PerfilBaseStyle, PerfilStyle } from "@/styles/styled";
-import { useState } from "react";
+import { DeleteStyle, LogoutStyle, ModalDeleteStyle, ModalErrorStyle, PerfilBaseStyle, PerfilStyle } from "@/styles/styled";
+import { useEffect, useState } from "react";
 import InfosUser from "./InfosUser";
 import { CgLogOut } from "react-icons/cg";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -14,8 +14,6 @@ import Modal from "@/components/Modal";
 
 
 export default function Perfil(){
-
-    const navigate = useRouter()
 
     const [modal, setModal] = useState<boolean>(false)
 
@@ -44,6 +42,45 @@ export default function Perfil(){
             alert(error)
         }
     }
+
+    const [showModal, setShowModal] = useState<boolean>(false)
+    const [isProfile, setIsProfile] = useState<boolean>(false)
+    const navigate = useRouter()
+
+    useEffect(() => {
+        const email = sessionStorage.getItem("userEmail")
+        const placa = sessionStorage.getItem("veiculoPlaca")
+
+        if(email && placa){
+            setIsProfile(true)
+        }else{
+            setShowModal(true)
+        }
+    }, [])
+
+    const handleLoginRedirect = () => {
+        navigate.push("/login"); // Redireciona para a página de login
+    };
+
+    if (showModal) {
+        // Exibe o modal de login obrigatório
+        return (
+            <Modal open={showModal} onClose={() => setShowModal(false)}>
+                <ModalErrorStyle>
+                    <div className="containerText">
+                        <h3 className="title">Erro!</h3>
+                        <p className="descricao">Você deve primeiro fazer login.</p>
+                    </div>
+                    <button className="btnCancelar btn" onClick={handleLoginRedirect}>Fazer Login</button>
+                </ModalErrorStyle>
+            </Modal>
+        );
+    }
+
+    if (!isProfile) {
+        return null; // Evita renderizar a página até verificar o login
+    }
+   
 
     return(
         <div>

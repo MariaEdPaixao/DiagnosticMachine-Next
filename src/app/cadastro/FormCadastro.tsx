@@ -1,12 +1,17 @@
+import Modal from "@/components/Modal";
 import TituloGeral from "@/components/TituloGeral";
-import { BtnForm, ContainerForm, FormVeiculoStyle } from "@/styles/styled";
+import { BtnForm, ContainerForm, FormVeiculoStyle, ModalSuccessStyle } from "@/styles/styled";
 import { UsuarioType } from "@/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
+
 
 export default function FormCadastro(){
 
      const navigate = useRouter()
+
+     const [open, setOpen] = useState<boolean>(false)
 
      const [usuario, setUsuario] = useState<UsuarioType>({
           'email': "",
@@ -37,7 +42,11 @@ export default function FormCadastro(){
           
                if(response.ok){
                     sessionStorage.setItem("userEmail", usuario.email);
-                    navigate.push('/cadastro/cadastro-veiculo')
+                    
+                    setOpen(true)
+                    setTimeout(() => {
+                         navigate.push('/cadastro/cadastro-veiculo') // Redireciona após 2 segundos
+                     }, 2000);
                }else{
                     const errorData = await response.json()
                     setError(errorData.message || "Ocorreu um erro")
@@ -80,6 +89,17 @@ export default function FormCadastro(){
                {error && <p style={{ color: "red" }}>{error}</p>}
                 <BtnForm type="submit" value="Cadastrar"/>
             </FormVeiculoStyle>
+            <Modal open={open} onClose={() => setOpen(false)}>
+                <ModalSuccessStyle>
+                    <div className="containerText">
+                        <FaCheckCircle className="icon-success"/>
+                        <h3 className="title" >Sucesso!</h3>
+                        <p className="descricao">Cadastro realizado.</p>
+                    </div>
+                    
+                    <button className="btnCancelar btn" onClick={()=>setOpen(false)}>OKAY</button>
+                </ModalSuccessStyle>
+            </Modal>
         </ContainerForm>
     )
 }
