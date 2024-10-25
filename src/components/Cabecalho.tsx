@@ -46,7 +46,7 @@ export default function Cabecalho() {
     <HeaderStyle>
       <nav className="nav-bar">
         <div className="logo">
-          <Link href={'/'}> <Image src={Logo} alt="logo da página" height={90} /> </Link>
+          <Link href={'/'}> <Image src={Logo} alt="logo da página" height={90}/> </Link>
         </div>
         <div className="nav-list">
           <ul>
@@ -68,7 +68,7 @@ export default function Cabecalho() {
               <Link href="/login"><p>Login</p></Link>
             )
           }
-          <Link href="/perfil"><Image src={perfil} alt="perfil" /></Link>  
+          <Link href="/perfil"><Image src={perfil} alt="perfil"/></Link>  
         </div>
 
         <div className="mobile-menu-icon">

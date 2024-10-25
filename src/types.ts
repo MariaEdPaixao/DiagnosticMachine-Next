@@ -47,6 +47,10 @@ export type UserType = {
     telefone: string;
 }
 
+export type FotoRequestType = {
+    foto_perfil: string;
+}
+
 export type ModeloMarcaType = {
     idModeloMarca: number;
     marca: string;
