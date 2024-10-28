@@ -17,6 +17,10 @@ export default function Cabecalho() {
 
   const [logado, setLogado] = useState<boolean>(false)
 
+  const [imgURL, setImgURL] = useState<string>("")
+
+  const email = sessionStorage.getItem("userEmail")
+
   const menuShow = () => {
     const menuMobile = document.querySelector(".mobile-menu") as HTMLElement | null;
     if (menuMobile) {
@@ -31,11 +35,29 @@ export default function Cabecalho() {
     }
   };
 
-  useEffect(() => {
-      const email = sessionStorage.getItem("userEmail")
+  const fetchFotoData = async () => {
+    try {
+        const response = await fetch(`http://localhost:8080/usuarioresource/exibirFoto/${email}`);
+        if (response.ok) {
+            const dadosFoto = await response.json();
+            if (dadosFoto.foto != " ") {
+                setImgURL(dadosFoto.foto);
+                console.log(dadosFoto.foto)
+            }
+        } else {
+            const errorDados = await response.json();
+            alert(errorDados.message || "Ocorreu um erro");
+        }
+    } catch (error) {
+        alert("Erro ao exibir o usuário");
+        console.error("Erro ao exibir o usuário", error);
+    }
+  };
 
+  useEffect(() => {
       if(email){
         setLogado(true)
+        fetchFotoData()
       }else{
         setLogado(false)
       }
@@ -68,7 +90,9 @@ export default function Cabecalho() {
               <Link href="/login"><p>Login</p></Link>
             )
           }
-          <Link href="/perfil"><Image src={perfil} alt="perfil"/></Link>  
+          
+          {imgURL ? (<Link href="/perfil"><Image src={imgURL} alt="Imagem Perfil" height={200} width={203} layout="intrinsic" className="imgFoto"/></Link> ) : ( <Link href="/perfil"><Image src={perfil} alt="perfil"/></Link> )}
+           
         </div>
 
         <div className="mobile-menu-icon">
@@ -81,7 +105,7 @@ export default function Cabecalho() {
 
       <div className="mobile-menu">
         <div className="perfil">
-          <Link href="/perfil"><Image src={perfil} alt="perfil" /></Link>
+          {imgURL ? (<Link href="/perfil"><Image src={imgURL} alt="Imagem Perfil" height={200} width={203} layout="intrinsic" className="imgFoto"/></Link> ) : ( <Link href="/perfil"><Image src={perfil} alt="perfil"/></Link> )}
           {
             logado ? (
               <>

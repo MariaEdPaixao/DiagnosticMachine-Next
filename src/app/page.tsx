@@ -12,12 +12,12 @@ import CardFeedback from "@/components/CardFeedback";
 import { CardFeedbackProps } from "@/types";
 
 const feedbacks: CardFeedbackProps[] = [
-  {nome: "Juliana", comentario: "Eu ameii a comunicação. O Carlos é super empático, parece que estou falando com um mecânico mesmo."},
+  {nome: "Juliana Gonçalves", comentario: "Eu ameii a comunicação. O Carlos é super empático, parece que estou falando com um mecânico mesmo."},
   {nome: "Francisco Alves", comentario: "Ótimo me ajudou a resolver o problema do meu veículo quando eu mais precisei."},
-  {nome: "Luis Carlos Silva", comentario: "Muito bom, além de me ajudar com meu veículo, tive a oportunidade de aprender muito sobre os veículos no proprio site."}
+  {nome: "Gustavo Geremia", comentario: "Gostei muito! o design e a construção do site é muito boa, me ajudou bastante com o meu problema. Recomendo."}
 ];
 
-
+  
 export default function Home() {
 
   return (

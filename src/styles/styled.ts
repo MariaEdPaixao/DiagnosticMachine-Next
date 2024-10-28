@@ -1,7 +1,6 @@
 import { TituloStyleProps } from "@/types";
 import styled from "styled-components";
 
-
 export const FooterStyle = styled.footer`
 
    margin-top: 30px;
@@ -107,6 +106,13 @@ export const HeaderStyle = styled.header`
       margin-left: 70px;
       margin-top: 18px;
       font-size: 1.15rem;
+   }
+
+   .imgFoto{
+      width: 64px;
+      height: 62px;
+      border-radius: 50%;
+      margin-left: 2px;
    }
    .perfil a{
       text-decoration: none;
@@ -1182,6 +1188,28 @@ export const IdentificacaoStyle = styled.section`
    }
 
 `
+export const BtnEnviarStyle = styled.button`
+   border-radius: 70%;
+   margin-left: 20px;
+   width: 53px;
+   height: 50px;
+
+   display: flex;
+   justify-content: center;
+
+
+   .img-btn{
+      margin: auto;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 55px;
+      height: 55px;
+      background-size: 65px;
+      /* border-radius: 50%; */
+      cursor: pointer;
+   }
+`
+
 export const BtnForm = styled.input`
       border: none;
       width: 100%;
@@ -1381,18 +1409,6 @@ export const InteragirChatStyle = styled.article`
       font-size: 22px;
       box-shadow: 3px 5px 2px black;
    }
-
-#enviar {
-    margin-left: 10px;
-    background-image: url('../assets/img/chat/icon-enviar.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 55px;
-    height: 55px;
-    background-size: 65px;
-    border-radius: 77px;
-    cursor: pointer;
-}
    
       #id-entrada {
          flex-grow: 1; 
