@@ -48,7 +48,9 @@ export default function FormCadastro(){
                const response = await fetch("http://localhost:8080/usuarioresource/cadastroUsuario", cabecalho)
           
                if(response.ok){
-                    sessionStorage.setItem("userEmail", usuario.email);
+                    if (typeof window !== "undefined") {
+                         sessionStorage.setItem("userEmail", usuario.email);
+                    }
                     
                     setOpen(true)
                     setTimeout(() => {

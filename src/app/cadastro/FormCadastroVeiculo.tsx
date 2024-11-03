@@ -61,43 +61,49 @@ export default function FormCadastroVeiculo() {
         try{
             const response = await fetch("http://localhost:8080/veiculoresource/cadastroVeiculo", cabecalho)
 
-            if(response.ok){
-                sessionStorage.setItem("veiculoPlaca", veiculo.placa);
-                
-                const email = sessionStorage.getItem("userEmail")
-
-                const response2 = await fetch(`http://localhost:8080/veiculoresource/buscaIdVeiculo/${veiculo.placa}`);
-                const response3 = await fetch(`http://localhost:8080/usuarioresource/buscaIdUsuario/${email}`)
-
-                if (response2.ok && response3.ok){
-                    const idVeiculo = await response2.json(); 
-                    const idUsuario = await response3.json();
-
-                    const responseAssociar = await fetch(`http://localhost:8080/veiculoresource/associacaoUserVeiculo/${idUsuario}/${idVeiculo}`)
-
-                    if(responseAssociar.ok){
-                        sessionStorage.setItem("idVeiculo", idVeiculo);
-                        sessionStorage.setItem("idUsuario", idUsuario);
-                        
-                        setOpen(true)
-                        setTimeout(() => {
-                            navigate.push('/perfil') // Redireciona após 2 segundos
-                        }, 2000);
-                    }else {
-                        console.error("Erro ao associar o usuário e o veiculo", error);
-                        setError("Erro ao associar o usuário e o veiculo");
+            if (response.ok) {
+                // Verifica se está no lado do cliente antes de acessar sessionStorage
+                if (typeof window !== "undefined") {
+                    sessionStorage.setItem("veiculoPlaca", veiculo.placa);
+                    
+                    const email = sessionStorage.getItem("userEmail");
+            
+                    const response2 = await fetch(`http://localhost:8080/veiculoresource/buscaIdVeiculo/${veiculo.placa}`);
+                    const response3 = await fetch(`http://localhost:8080/usuarioresource/buscaIdUsuario/${email}`);
+            
+                    if (response2.ok && response3.ok) {
+                        const idVeiculo = await response2.json();
+                        const idUsuario = await response3.json();
+            
+                        const responseAssociar = await fetch(`http://localhost:8080/veiculoresource/associacaoUserVeiculo/${idUsuario}/${idVeiculo}`);
+            
+                        if (responseAssociar.ok) {
+                            // Acesso ao sessionStorage deve ser feito aqui também
+                            sessionStorage.setItem("idVeiculo", idVeiculo);
+                            sessionStorage.setItem("idUsuario", idUsuario);
+                            
+                            setOpen(true);
+                            setTimeout(() => {
+                                navigate.push('/perfil'); // Redireciona após 2 segundos
+                            }, 2000);
+                        } else {
+                            console.error("Erro ao associar o usuário e o veiculo", error);
+                            setError("Erro ao associar o usuário e o veiculo");
+                        }
+            
+                    } else {
+                        console.error("Erro ao buscar o id do veículo ou do usuário", error);
+                        setError("Erro ao buscar o id do veículo");
                     }
-
+                    
                 } else {
-                    console.error("Erro ao buscar o id do veículo", error);
-                    setError("Erro ao buscar o id do veículo");
+                    setError("Acesso ao sessionStorage não disponível.");
                 }
-                
-            }else{
+            } else {
                 const errorData = await response.json();
                 setError(errorData.message || "Ocorreu um erro no login.");
             }
-
+            
         }catch(error){
             console.error("Erro ao realizar login", error);
             setError("Erro ao conectar com o servidor.");

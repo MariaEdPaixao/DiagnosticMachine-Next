@@ -18,27 +18,31 @@ export default function InfosVeiculo(){
 
 
     const fetchUserData = async () => {
-        try{
-            const idUsuario = sessionStorage.getItem("idUsuario");
+        try {
+            // Verifica se está no lado do cliente antes de acessar sessionStorage
+            const idUsuario = typeof window !== "undefined" ? sessionStorage.getItem("idUsuario") : null;
             const parsedIdUsuario = idUsuario ? parseInt(idUsuario, 10) : null;
-
- 
-            const response = await fetch(`http://localhost:8080/veiculoresource/exibirVeiculo/${parsedIdUsuario}`)
-
-            if(response.ok){
-                const dadosVeiculo = await response.json()
-                setVeiculo(dadosVeiculo) 
-            }else{
-                const errorData = await response.json();
-                alert(errorData.message || "Ocorreu um erro");
+    
+            if (parsedIdUsuario) {
+                const response = await fetch(`http://localhost:8080/veiculoresource/exibirVeiculo/${parsedIdUsuario}`);
+    
+                if (response.ok) {
+                    const dadosVeiculo = await response.json();
+                    setVeiculo(dadosVeiculo); 
+                } else {
+                    const errorData = await response.json();
+                    alert(errorData.message || "Ocorreu um erro");
+                }
+            } else {
+                alert("ID do usuário não encontrado no sessionStorage.");
             }
-
-        }catch(error){
+    
+        } catch (error) {
             alert("Erro ao exibir o veículo");
             console.error("Erro ao exibir o veículo", error);
         }
-
-    }
+    };
+    
 
     useEffect(() =>{
         fetchUserData();

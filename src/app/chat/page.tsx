@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,7 @@ import InteragirChat from "./InteragirChat";
 import { ContainerChatStyle, ContainerMensagens, ModalErrorStyle } from "../../styles/styled";
 import Image from "next/image";
 
-//imagens
+// imagens
 import perfilCarlos from "../../assets/img/chat/Carlos.png";
 import perfilUser from "../../assets/img/chat/User.png";
 import Modal from "@/components/Modal";
@@ -16,16 +16,21 @@ import Modal from "@/components/Modal";
 export default function Chat() {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar login
     const [showModal, setShowModal] = useState(false); // Estado para controlar a exibição do modal
+    const [nome, setNome] = useState(""); // Estado para armazenar o nome do usuário
     const navigate = useRouter();
 
     useEffect(() => {
-        const userEmail = sessionStorage.getItem("userEmail");
+        // Verifica se está no lado do cliente antes de acessar o sessionStorage
+        if (typeof window !== "undefined") {
+            const userEmail = sessionStorage.getItem("userEmail");
+            const nomeUser = sessionStorage.getItem("nomeUser");
 
-        // Verifica se ambos estão presentes
-        if (userEmail){
-            setIsLoggedIn(true); // Usuário logado
-        } else {
-            setShowModal(true); // Exibe o modal de login obrigatório
+            if (userEmail) {
+                setIsLoggedIn(true); // Usuário logado
+                setNome(nomeUser || ""); // Define o nome do usuário, se disponível
+            } else {
+                setShowModal(true); // Exibe o modal de login obrigatório
+            }
         }
     }, []);
 
@@ -35,9 +40,9 @@ export default function Chat() {
 
     if (showModal) {
         setTimeout(() => {
-            navigate.push('/') // Redireciona após 2 segundos
+            navigate.push('/'); // Redireciona após 2 segundos
         }, 2000);
-        // Exibe o modal de login obrigatório
+        
         return (
             <Modal open={showModal} onClose={() => setShowModal(false)}>
                 <ModalErrorStyle>
@@ -49,7 +54,6 @@ export default function Chat() {
                 </ModalErrorStyle>
             </Modal>
         );
-       
     }
 
     if (!isLoggedIn) {
@@ -57,8 +61,6 @@ export default function Chat() {
     }
 
     // Se o usuário estiver logado, renderiza o conteúdo do chat
-    const nome = sessionStorage.getItem("nomeUser");
-
     return (
         <ContainerChatStyle className="container">
             <IdentificacaoChat />
@@ -74,7 +76,6 @@ export default function Chat() {
                     <p>Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sapiente est officia numquam!</p>
                     <Image src={perfilUser} alt="perfil do usuário" className="icon" />
                 </div>
-
             </ContainerMensagens>
 
             <InteragirChat />

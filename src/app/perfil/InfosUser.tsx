@@ -16,12 +16,18 @@ export default function InfosUser(){
 
     const primeiro_nome = () => {
         if (user && user.nome_completo) {
-            const nome_lista = user.nome_completo.split(" "); 
-            sessionStorage.setItem("nomeUser", nome_lista[0])
-            return nome_lista[0]; 
+            const nome_lista = user.nome_completo.split(" ");
+    
+            // Verifica se está no lado do cliente antes de usar sessionStorage
+            if (typeof window !== "undefined") {
+                sessionStorage.setItem("nomeUser", nome_lista[0]);
+            }
+    
+            return nome_lista[0];
         }
         return ""; // Retorna uma string vazia se 'user.nome_completo' não estiver definido
-    }
+    };
+    
 
     const [open, setOpen] = useState<boolean>(false)
     const [openError, setOpenError] = useState<boolean>(false)
@@ -65,29 +71,35 @@ export default function InfosUser(){
     }
 
     const fetchUserData = async () => {
-        try{
-            const email = sessionStorage.getItem("userEmail")
-            const response = await fetch(`http://localhost:8080/usuarioresource/exibirUsuario/${email}`)
-
-            if(response.ok){
-                const dadosUser = await response.json()
-                
-                // Verificando se data_nasc precisa ser formatada
-                if (dadosUser.data_nasc) {
-                    dadosUser.data_nasc = formatDateToInput(dadosUser.data_nasc);
+        try {
+            // Verifica se está no lado do cliente antes de acessar sessionStorage
+            const email = typeof window !== "undefined" ? sessionStorage.getItem("userEmail") : null;
+    
+            if (email) {
+                const response = await fetch(`http://localhost:8080/usuarioresource/exibirUsuario/${email}`);
+    
+                if (response.ok) {
+                    const dadosUser = await response.json();
+    
+                    // Verificando se data_nasc precisa ser formatada
+                    if (dadosUser.data_nasc) {
+                        dadosUser.data_nasc = formatDateToInput(dadosUser.data_nasc);
+                    }
+    
+                    setUser(dadosUser);
+                } else {
+                    const errorData = await response.json();
+                    alert(errorData.message || "Ocorreu um erro");
                 }
-                setUser(dadosUser) 
-                
             } else {
-                const errorData = await response.json();
-                alert(errorData.message || "Ocorreu um erro");
+                alert("Email do usuário não encontrado no sessionStorage.");
             }
-
-        }catch(error){
+        } catch (error) {
             alert("Erro ao exibir o usuário");
             console.error("Erro ao exibir o usuário", error);
         }
-    }
+    };
+    
 
     useEffect(() =>{
         fetchUserData();
