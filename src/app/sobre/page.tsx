@@ -41,7 +41,7 @@ export default function Sobre(){
 
             <DivLinks>
                 <h3> Link do repositorio: <a href="https://github.com/MariaEdPaixao/DiagnosticMachine-Next/commits/main/" target="_blank">https://github.com/MariaEdPaixao/DiagnosticMachine-Next/commits/main/</a></h3>
-                <h3> Link do prototipo: <a href="https://www.figma.com/file/SymOttX6dpdG7rZLFsHLtK/Prototipos?type=design&node-id=0%3A1&mode=design&t=NrUAiifjth09i6Pa-1" target="_blank">https://www.figma.com/file/SymOttX6dpdG7rZLFsHLtK/Prototipos?type=design&node-id=0%3A1&mode=design&t=NrUAiifjth09i6Pa-1</a></h3>
+                <h3> Link do prototipo: <a href="https://www.figma.com/design/i8geraGT4p6xdm6tp9Az0V/Prototipo-DiagnosticMachine?node-id=0-1&t=1zAgMrcfDSYGVLtM-1" target="_blank">https://www.figma.com/design/i8geraGT4p6xdm6tp9Az0V/Prototipo-DiagnosticMachine?node-id=0-1&t=1zAgMrcfDSYGVLtM-1</a></h3>
             </DivLinks>
         </main>
     )
