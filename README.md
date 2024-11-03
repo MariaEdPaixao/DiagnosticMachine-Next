@@ -81,4 +81,4 @@ Antes de começar, certifique-se de que você possui:
     Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
     - Nome: Maria Eduarda
     - E-mail: mariapaixao0807@gmail.com
-    Acesse o site: https://diagnostic-machine.vercel.app/
+    Acesse o site: [text](https://diagnostic-machine.vercel.app/)
