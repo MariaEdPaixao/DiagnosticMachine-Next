@@ -27,7 +27,7 @@ export default function Rodape(){
                         </Link>
                     </li>
                     <li className="opcoes">
-                        <Link href="/aprenda+">Aprenda + </Link>
+                        <Link href="/aprenda">Aprenda + </Link>
                     </li>
                     <li className="opcoes">
                         <Link href="/sobre">Sobre nós </Link>

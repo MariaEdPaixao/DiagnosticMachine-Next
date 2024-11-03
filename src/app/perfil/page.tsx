@@ -233,7 +233,7 @@ export default function Perfil() {
                         <p className="descricao">Foto atualizada com sucesso!</p>
                     </div>
                     
-                    <button className="btnCancelar btn" onClick={()=>setModalSuccess(false)}>OKAY</button>
+                    <button className="btnCancelar btn" onClick={()=>{setModalSuccess(false); window.location.reload();}}>OKAY</button>
                  
                 </ModalSuccessStyle>
             </Modal>

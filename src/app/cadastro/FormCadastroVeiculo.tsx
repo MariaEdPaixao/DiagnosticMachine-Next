@@ -147,7 +147,7 @@ export default function FormCadastroVeiculo() {
                     <AnoCarro onChange = {handleChangeSelect}/>
                     <div className="campos">
                         <label htmlFor="idplaca"> Placa </label>
-                        <input type="text" name="placa" id="idplaca" placeholder="EX: ABC1D23" className="selectStyle" onChange={handleChangeInput}/>
+                        <input type="text" name="placa" id="idplaca" placeholder="EX: ABC1D23|ABC1D23" className="selectStyle" onChange={handleChangeInput}/>
                     </div>
                 </div>
                 <br />

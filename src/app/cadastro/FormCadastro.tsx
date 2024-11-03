@@ -30,6 +30,13 @@ export default function FormCadastro(){
 
      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault()
+          
+          // Validação do telefone
+          const telefoneValido = /^[0-9]{11}$/.test(usuario.telefone);
+          if (!telefoneValido) {
+               setError("O telefone deve conter exatamente 11 dígitos.");
+               return; // Interrompe o envio se o telefone for inválido
+          }
 
           const cabecalho = {
                method: 'POST',
@@ -78,11 +85,11 @@ export default function FormCadastro(){
                 </div>
                 <div className="campos">
                      <label htmlFor="idtelefone">Telefone</label>
-                     <input type="text" name="telefone" id="idtelefone" placeholder="+5511999999999" className="selectStyle" maxLength={14} onChange={handleChangeInput} required/>
+                     <input type="text" name="telefone" id="idtelefone" placeholder="11999999999" className="selectStyle" maxLength={11} onChange={handleChangeInput} required/>
                 </div>
                 <div className="campos">
                      <label htmlFor="idata">Data de Nascimento</label>
-                     <input type="date" name="data_nasc" id="idata" placeholder="+5511999999999" className="selectStyle" onChange={handleChangeInput} required/>
+                     <input type="date" name="data_nasc" id="idata" className="selectStyle" onChange={handleChangeInput} required/>
                 </div>
 
                <br />
